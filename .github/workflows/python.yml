@@ -25,6 +25,12 @@ jobs:
     - name: Run Python Script
       run: python ./mypython.py
 
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        path: |
+          Python 
+
  
   Deploy: 
      needs: Build
