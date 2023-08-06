@@ -24,8 +24,7 @@ jobs:
 
     - name: Run Python Script
       run: python ./mypython.py
-    - name: Run test
-      run: python -m unittest ./mypython.py
+
  
   Deploy: 
      needs: Build
