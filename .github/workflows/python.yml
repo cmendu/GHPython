@@ -37,7 +37,13 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         path: |
-          mypython.py 
+          mypython.py
+          
+    - name:  Some step that requires the token
+      run: |
+        echo Using the GitHub token!
+      env:
+        MY_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
  
   Deploy: 
