@@ -1,4 +1,7 @@
-name: Simple Workflow
+
+yaml
+Copy code
+name: Simple Python Workflow with Inputs and Outputs
 
 on:
   workflow_dispatch:
@@ -9,22 +12,24 @@ on:
         default: 'Hello World'
 
 jobs:
-  process-inputs:
+  process-input:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Setup Python
-        uses: actions/setup-python@v3
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
 
-      - name: Process Input
-        id: processing
-        run: |
-          echo " Received Input: ${{ github.events.input.inputValue }}"
-          outputValue = "${{ github.events.input.inputValue }} from Github actions"
-          echo "::set-output name=outputValue::$outputValue"
-
-      - name: Display Processed Output
-        run: echo "Processed Output: ${{ steps.processing.outputs.outputValue }}"
+    - name: Process Input
+      id: processing
+      run: |
+        echo "Received Input: ${{ github.event.inputs.inputValue }}"
+        outputValue="${{ github.event.inputs.inputValue }} from GitHub Actions!"
+        echo "::set-output name=outputValue::$outputValue"
+      
+    - name: Display Processed Output
+      run: echo "Processed Output: ${{ steps.processing.outputs.outputValue }}"
