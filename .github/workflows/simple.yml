@@ -1,0 +1,30 @@
+name: Simple Workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      inputValue:
+        description: 'Input Value'
+        required: true
+        default: 'Hello World'
+
+jobs:
+  process-inputs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v3
+
+      - name: Process Input
+        id: processing
+        run: |
+          echo " Received Input: ${{ github.events.input.inputValue }}"
+          outputValue = "${{ github.events.input.inputValue }} from Github actions"
+          echo "::set-output name=outputValue::$outputValue"
+
+      - name: Display Processed Output
+        run: echo "Processed Output: ${{ steps.processing.outputs.outputValue }}"
