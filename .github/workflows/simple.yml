@@ -27,6 +27,4 @@ jobs:
         echo "Received Input: ${{ github.event.inputs.inputValue }}"
         outputValue="${{ github.event.inputs.inputValue }} from GitHub Actions!"
         echo "::set-output name=outputValue::$outputValue"
-      
-    - name: Display Processed Output
-      run: echo "Processed Output: ${{ steps.processing.outputs.outputValue }}"
+
