@@ -29,5 +29,5 @@ jobs:
         echo "::set-output name=outputValue::$outputValue"
 
     - name: Display Processed Output
-      run: echo "Processed Output: ${{ steps.processing.outputs.outputValue }}"
+      run: echo "Processed Output::${{ steps.processing.outputs.outputValue }}"
 
